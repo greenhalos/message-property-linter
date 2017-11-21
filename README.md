@@ -2,7 +2,21 @@
 
 Simple Maven Plugin for linting and formatting message properties in your project.
 
+Currently only works wit Java 8.
+
 ## How to use
+
+add the repository to your `pom.xml`
+```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+```
+
+then add the plugin to your `pom.xml`
 ```xml
  <plugin>
     <groupId>lu.greenhalos.linter</groupId>
