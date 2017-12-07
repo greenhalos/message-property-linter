@@ -80,24 +80,6 @@
                 <artifactId>maven-plugin-plugin</artifactId>
                 <version>3.4</version>
             </plugin>
-            <plugin>
-                <groupId>lu.greenhalos</groupId>
-                <artifactId>message-properties-linter-maven-plugin</artifactId>
-                <version>2.0-SNAPSHOT</version>
-                <configuration>
-                    <!--Optional: directory, where the files are located. Default: src/main/resources-->
-                    <directory>testdata/resources</directory>
-
-                    <!--Optional: prefix with which every file starts. Default: messages-->
-                    <prefix>messages</prefix>
-
-                    <!--Optional: suffix with which the files are ending. Default: .properties-->
-                    <suffix>.properties</suffix>
-
-                    <!--Optional: When true, the formatter will not change the files. No impact on the linter. Default: false-->
-                    <dryRun>true</dryRun>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
