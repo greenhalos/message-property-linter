@@ -1,6 +1,5 @@
 package lu.greenhalos.linter.messageproperties.linter;
 
-import lu.greenhalos.linter.messageproperties.domain.Config;
 import lu.greenhalos.linter.messageproperties.domain.Language;
 import lu.greenhalos.linter.messageproperties.domain.MessageProperties;
 
@@ -45,16 +44,27 @@ public class Linter {
             missingLanguages.removeAll(foundLanguages);
         }
 
-        public void logError(Config config) {
+        public String getPropertyKey() {
 
-            config.getLog()
-                .error("Missing language for key \"" + propertyKey + "\": expected languages: " + requestedLanguages
-                    + " but found " + foundLanguages);
-            missingLanguages.forEach(l ->
-                    config.getLog()
-                    .error(
-                        "\t" + config.getDirectory() + "/" + config.getPrefix() + l.getFileExtension()
-                        + config.getSuffix()));
+            return propertyKey;
+        }
+
+
+        public List<Language> getRequestedLanguages() {
+
+            return requestedLanguages;
+        }
+
+
+        public Set<Language> getFoundLanguages() {
+
+            return foundLanguages;
+        }
+
+
+        public Set<Language> getMissingLanguages() {
+
+            return missingLanguages;
         }
     }
 }

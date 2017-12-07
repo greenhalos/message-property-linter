@@ -10,8 +10,6 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static lu.greenhalos.linter.messageproperties.writer.Writer.writeMessageProperties;
-
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.mapping;
@@ -22,15 +20,18 @@ public class Formatter {
 
     private static final Pattern COMPILE_LINE = Pattern.compile("([^.]*)(\\..*)*");
     private static final int MAX_GROUP_SIZE = 8;
+    private static final int INDEX_TAIL = 1;
+    private static final int INDEX_HEAD = 0;
 
     private Formatter() {
     }
 
-    public static void format(MessageProperties messageProperties, Config config) {
+    public static Map<String, List<String>> format(MessageProperties messageProperties, Config config) {
 
         Map<String, List<String>> groupedKeys = group(messageProperties.getKeys());
         config.getLog().info("found " + groupedKeys.size() + " groups");
-        writeMessageProperties(groupedKeys, messageProperties, config);
+
+        return groupedKeys;
     }
 
 
@@ -80,11 +81,18 @@ public class Formatter {
                 .map(k -> k.substring(prefixKey.length()))
                 .map(COMPILE_LINE::matcher)
                 .filter(Matcher::find)
-                .collect(groupingBy(m -> prefixKey + m.group(1), TreeMap::new, mapping(m -> prefixKey + m.group(0),
+                .collect(groupingBy(m -> prefixKey + getPartsOfKey(m, INDEX_TAIL), TreeMap::new, mapping(m ->
+                                prefixKey + getPartsOfKey(m, INDEX_HEAD),
                             collectingAndThen(toList(), (l -> l.stream().sorted().collect(toList()))))));
 
         result.putAll(restMap);
 
         return result;
+    }
+
+
+    private static Object getPartsOfKey(Matcher m, int group) {
+
+        return m.group(group);
     }
 }

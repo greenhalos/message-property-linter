@@ -14,6 +14,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 import java.io.IOException;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import static lu.greenhalos.linter.messageproperties.linter.Linter.validate;
 
@@ -56,11 +57,28 @@ public class LinterGoal extends AbstractMojo {
             List<Linter.MissingMessagePropertyKey> validate = validate(read);
 
             if (!validate.isEmpty()) {
-                validate.forEach(v -> v.logError(config));
+                validate.forEach(printToLog(config));
                 throw new MojoFailureException("There were invalid message properties");
             }
         } catch (IOException e) {
             config.getLog().error("Something went wrong while finding files", e);
         }
+    }
+
+
+    private static Consumer<Linter.MissingMessagePropertyKey> printToLog(Config config) {
+
+        return
+            v -> {
+            config.getLog()
+                .error("Missing language for key \"" + v.getPropertyKey() + "\": expected languages: "
+                    + v.getRequestedLanguages()
+                    + " but found " + v.getFoundLanguages());
+            v.getMissingLanguages().forEach(l ->
+                    config.getLog()
+                    .error(
+                        "\t" + config.getDirectory() + "/" + config.getPrefix() + l.getFileExtension()
+                        + config.getSuffix()));
+        };
     }
 }

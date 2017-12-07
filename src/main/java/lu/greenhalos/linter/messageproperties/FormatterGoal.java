@@ -13,6 +13,11 @@ import org.apache.maven.plugins.annotations.Parameter;
 
 import java.io.IOException;
 
+import java.util.List;
+import java.util.Map;
+
+import static lu.greenhalos.linter.messageproperties.writer.Writer.writeMessageProperties;
+
 
 @Mojo(name = "formatter")
 public class FormatterGoal extends AbstractMojo {
@@ -49,7 +54,8 @@ public class FormatterGoal extends AbstractMojo {
         try {
             Reader reader = new Reader(config);
             MessageProperties messageProperties = reader.getMessageProperties();
-            Formatter.format(messageProperties, config);
+            Map<String, List<String>> groupedKeys = Formatter.format(messageProperties, config);
+            writeMessageProperties(groupedKeys, messageProperties, config);
         } catch (IOException e) {
             config.getLog().error("Something went wrong while finding files", e);
         }
