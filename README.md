@@ -1,4 +1,4 @@
-# Message Property Linter
+# Message Property Linter [![Build Status](https://travis-ci.org/greenhalos/message-property-linter.svg?branch=message-properties-linter-maven-plugin-1.0)](https://travis-ci.org/greenhalos/message-property-linter)
 
 Simple Maven Plugin for linting and formatting message properties in your project.
 
