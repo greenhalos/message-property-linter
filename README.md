@@ -2,7 +2,7 @@
 
 Simple Maven Plugin for linting and formatting message properties in your project.
 
-Currently only works wit Java 8.
+Currently only works with Java 8.
 
 ## How to use
 
@@ -47,3 +47,11 @@ then add the plugin to your `pom.xml`
     </executions>
 </plugin>
 ```
+
+## How to release
+
+1. Change version in `pom.xml`
+1. push to master
+1. create tag with `v#.#`
+1. push tag
+1. Change version in `pom.xml` to match next `SNAPSHOT`-version

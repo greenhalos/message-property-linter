@@ -11,6 +11,24 @@
 
     <name>A message properties linter</name>
 
+    <scm>
+        <url>https://github.com/greenhalos/message-property-linter</url>
+        <connection>scm:git:git@github.com:greenhalos/message-property-linter.git</connection>
+        <developerConnection>scm:git:git@github.com:greenhalos/message-property-linter.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-cy6ergn0m-maven</id>
+            <name>bintray-plugins</name>
+            <url>http://dl.bintray.com/cy6ergn0m/maven</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.maven</groupId>
