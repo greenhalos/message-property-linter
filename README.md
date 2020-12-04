@@ -19,8 +19,8 @@ add the repository to your `pom.xml`
 then add the plugin to your `pom.xml`
 ```xml
  <plugin>
-    <groupId>lu.greenhalos.linter</groupId>
-    <artifactId>message-properties-linter-maven-plugin</artifactId>
+    <groupId>com.github.greenhalos</groupId>
+    <artifactId>message-property-linter</artifactId>
     <version>${linter.version}</version>
     <configuration>
 
